@@ -19,3 +19,8 @@ npm run build --report
 ```
 
 For a detailed explanation on how things work, check out the [guide](http://vuejs-templates.github.io/webpack/) and [docs for vue-loader](http://vuejs.github.io/vue-loader).
+
+当v-enter不可用提示tab问题时候，打开.eslintrc.js
+修改其中rules{
+  "no-tabs":"off"
+}
