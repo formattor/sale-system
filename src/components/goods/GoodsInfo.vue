@@ -27,7 +27,7 @@
 						<p class="price">
               市场价:<del>$2999</del>&nbsp;&nbsp;销售价:<span class="now_price">$2199</span>
             </p>
-            <p>购买数量<numbox></numbox></p>
+            <p>购买数量<numbox @getcount="getSelectCount" :max="goodsinfo.stock_quantity"></numbox></p>
             <p>
               <mt-button type="primary" size="small">立即购买</mt-button>
               <mt-button type="danger" size="small" @click="addToShopCar">加入购物车</mt-button>
@@ -93,7 +93,7 @@ export default {
     return {
       id: this.$route.params.id,
       lunbotuList: [],
-      goodsinfo: [],
+      goodsinfo: {},
       ballFlag: false,
       selectCount: 1
     }

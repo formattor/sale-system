@@ -1,6 +1,6 @@
 <template>
   <div>
-    <div class="mui-numbox" data-numbox-min='1' data-numbox-max='9'>
+    <div class="mui-numbox" data-numbox-min='1' :data-numbox-max='max'>
 			<button class="mui-btn mui-btn-numbox-minus" type="button">-</button>
 			<input id="test" class="mui-input-numbox" type="number" value="5"
       @change="countChanged" ref="numbox"/>
@@ -19,6 +19,12 @@ export default {
     countChanged () {
       // console.log(this.$refs.numbox.values)
       this.$emit('getcount', parseInt(this.$refs.numbox.values))
+    }
+  },
+  props: ['max'],
+  watch: {
+    'max': function (newVal, oldVal) {
+      // mui(Selector).numbox().setOption('step',5)
     }
   }
 }
