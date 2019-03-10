@@ -160,7 +160,7 @@ export default {
   components: {
     swiper,
     numbox
-  }
+  },
 }
 </script>
 
