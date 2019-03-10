@@ -10,6 +10,8 @@
      <mt-swipe-item>2</mt-swipe-item>
      <mt-swipe-item>3</mt-swipe-item>
     </mt-swipe>
+    <!-- 导入轮播图组件 -->
+    <!-- <swiper :isfull="true"></swiper> -->
     <!-- eslint-disable -->
     <ul class="mui-table-view mui-grid-view mui-grid-9">
 		  <li class="mui-table-view-cell mui-media mui-col-xs-4 mui-col-sm-3">
@@ -39,6 +41,7 @@
 
 <script>
 // import {Toast} from 'mint-ui'
+import swiper from './../subcomponents/swiper'
 export default {
   data () {
     return {}
@@ -60,6 +63,9 @@ export default {
     //       }
     //     })
     // }
+  },
+  components: {
+    swiper
   }
 }
 </script>

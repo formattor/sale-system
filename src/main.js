@@ -12,7 +12,7 @@ import Mint from 'mint-ui'
 import 'mint-ui/lib/style.css'
 import './lib/mui/css/mui.min.css'
 import './lib/mui/css/icons-extra.css'
-// import './lib/mui/js/mui.min.js'
+// import './lib/mui/js/mui.js'
 import VuePreview from 'vue-preview'
 Vue.use(VuePreview)
 // Vue.prototype.mui = mui
