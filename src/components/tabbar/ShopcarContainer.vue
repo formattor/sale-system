@@ -2,15 +2,15 @@
   <div class="shopcar-container">
     <div class="goods-list">
       <!--商品列表区域 -->
-      <div class="mui-card">
+      <div class="mui-card" v-for="item in goodsList" :key="item.id">
         <div class="mui-card-content">
           <div class="mui-card-content-inner">
             <mt-switch v-model="value"></mt-switch>
-            <img src="https://img2.woyaogexing.com/2018/03/08/53b79110033d698e!400x400_big.jpg" alt="">
+            <img :src="item.thumb_path" alt="">
             <div class="info">
-              <h1>小米手机降价了</h1>
+              <h1>{{item.title}}</h1>
               <p>
-                <span class="price">￥2199</span>
+                <span class="price">￥{{item.sell_price}}</span>
                 <numbox></numbox>
                 <a href="#">删除</a>
               </p>
@@ -21,8 +21,12 @@
       <!-- 结算区域  -->
       <div class="mui-card">
         <div class="mui-card-content">
-          <div class="mui-card-content-inner">
-            这是一个最简单的卡片视图控件；卡片视图常用来显示完整独立的一段信息，比如一篇文章的预览图、作者信息、点赞数量等
+          <div class="mui-card-content-inner jiesuan">
+            <div class="left">
+              <p>总计（不含运费）</p>
+              <p>已勾选商品 <span class="red">0</span> 件，总价 <span class="red">￥0</span></p>
+            </div>
+            <mt-button type="danger">去结算</mt-button>
           </div>
         </div>
       </div>
@@ -31,8 +35,31 @@
 </template>
 
 <script>
+/* eslint-disable */
 import numbox from './../subcomponents/goodsinfo_numbox'
 export default {
+  data () {
+    return {
+      goodsList:[]
+    }
+  },
+  created(){
+    this.getGoodsList()
+  },
+  methods: {
+    getGoodsList () {
+      var idArr = []
+      this.$store.state.car.forEach(item=>idArr.push(item.id))
+      if(idArr.length<=0){
+        return;
+      }
+      this.$http.get(''+idArr.join(",")).then(result=>{
+        if(result.body.status===0){
+          this.goodsList=result.body.message
+        }
+      })
+    }
+  },
   components: {
     numbox
   }
@@ -63,6 +90,16 @@ export default {
           color: red;
           font-weight: bold;
         }
+      }
+    }
+    .jiesuan{
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      .red{
+        color: red;
+        font-weight: bold;
+        font-size: 16px;
       }
     }
   }
