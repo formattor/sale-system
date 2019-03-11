@@ -14,16 +14,53 @@ import './lib/mui/css/mui.min.css'
 import './lib/mui/css/icons-extra.css'
 // import './lib/mui/js/mui.js'
 import VuePreview from 'vue-preview'
+import Vuex from 'vuex'
 Vue.use(VuePreview)
 // Vue.prototype.mui = mui
 Vue.use(Mint)
 Vue.use(VueResource)
+Vue.use(Vuex)
 Vue.config.productionTip = false
+// eslint-disable-next-line
+var car = JSON.parse(localStorage.getItem('car') | '[]')
+
+var store = new Vuex.Store({
+  state: {
+    car: car
+  },
+  mutations: {
+    /* eslint-disable */ 
+    addToCar (state, goodsinfo) {
+      var flag = false
+      state.car.some(item => {
+        if (item.id === goodsinfo.id) {
+          item.count += parseInt(goodsinfo.count)
+          flag=true
+          return true
+        }
+      })
+      if(!flag){
+        state.car.push(goodsinfo)
+      }
+      localStorage.setItem('car',JSON.stringify(state.car))
+    }
+  },
+  getters: {
+    // getAllCount(state){
+    //   var c=0
+    //   state.car.forEach(item=>{
+    //     c+=item.count
+    //   })
+    //   return c
+    // }
+  }
+})
 
 /* eslint-disable no-new */
 new Vue({
   el: '#app',
   router,
+  store,
   // render: h => h(App),
   components: { App },
   template: '<App/>'
