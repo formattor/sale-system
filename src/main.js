@@ -53,6 +53,12 @@ var store = new Vuex.Store({
     //   })
     //   return c
     // }
+    // getGoodsSelected(state){
+    //   var o={}
+    //   state.car.forEach(item=>{
+    //     o[item.id]=item.selected
+    //   })
+    // }
   }
 })
 

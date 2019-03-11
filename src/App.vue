@@ -2,7 +2,11 @@
 <!-- eslint-disable -->
   <div id="app" class="app-container">
     <!-- 顶部 header 区域-->
-      <mt-header fixed title="书店管理系统"></mt-header>
+      <mt-header fixed title="书店管理系统">
+				<span slot="left" @click="goBack" v-show="flag">
+					<mt-button icon="back">返回</mt-button>
+				</span>
+			</mt-header>
     <!-- 中间 router 区域-->
       <transition mode="out-in">
 				<router-view/>
@@ -33,7 +37,29 @@
 
 <script>
 export default {
-  name: 'App'
+  name: 'App',
+  data () {
+    return {
+      flag: false
+    }
+  },
+  created () {
+    // this.flag = this.$route.path !== '/home'
+  },
+  methods: {
+    goBack () {
+      this.$router.go(-1)
+    }
+  },
+  watch: {
+    '$router.path': function (newVal) {
+      if (newVal === '/home') {
+        this.flag = false
+      } else {
+        this.flag = true
+      }
+    }
+  }
 }
 </script>
 
@@ -46,7 +72,6 @@ export default {
 	padding-bottom: 50px;
 	overflow-x: hidden;
 }
-
 .v-enter{
 	opacity: 0;
 	transform: translateX(100%);
